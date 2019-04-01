@@ -20,6 +20,10 @@ or last two versions*/
                 ]
             }
         }],
+        "stage-2",
         "react"
+    ], 
+    "plugins": [
+        "syntax-dynamic-import"
     ]
 }
