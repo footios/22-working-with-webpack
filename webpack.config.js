@@ -15,6 +15,30 @@ module.exports = {
                      any imports or adjust for anything, 
                      the file structure, the folder structure will be 
                      the folder structure as we deployed in the end */
+    },
+    resolve: {
+        /*  tell webpack that it should be
+        aware of certain extensions
+        and if it encounters an import without an extension, 
+        it should try these extensions and see if it finds
+        a file of one of these. */
+        extentions: ['.js', '.jsx'] 
+        
+    },
+    /*  with loaders we make sure that we do correctly
+        handle different file types,
+        this is done with a special configuration 
+        on the same level as output and resolve which is named module
+        because an imported dependency is referred as a module,
+        we could kind of translate module with file. */
+    module: {
+        rules: [
+            {
+                test: /\.js$/, 
+                loader: 'babel-loader', // third party plugin which does smth to the file
+                exculed: /node_modules/
+            }
+        ]
     }
 }
 
