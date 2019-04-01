@@ -1,5 +1,6 @@
 const path = require('path');
 const autoprefixer = require('autoprefixer');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     devtool: 'cheap-module-eval-source-map',
@@ -14,7 +15,7 @@ and code splitting is just a different name for lazy loading,
 I have to add chunkFileName here to my output config.
 This simply determines what these other files, 
 the separate files which are generated for the lazy loaded
-code which is of course not included in the bundle, */
+code which is of course not included in the bundle...  */
         chunkFilename: '[id].js',
         publicPath: ''
     },
@@ -62,5 +63,12 @@ code which is of course not included in the bundle, */
                 loader: 'url-loader?limit=8000&name=images/[name].[ext]'
             }
 		]
-	}
+    },
+    plugins: [
+        new HtmlWebpackPlugin({
+            template: __dirname + '/src/index.html',
+            filename: 'index.html',
+            inject: 'body'
+        })
+    ]
 };
