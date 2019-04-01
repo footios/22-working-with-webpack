@@ -8,8 +8,8 @@ module.exports = {
 	output: {
 		path: path.resolve(__dirname, 'dist'), // where this should be stored,
 		filename: 'bundle.js', // where our or how our file should be named
-		publicPath:
-			'' /* that's important for webpack to know where our files are put to
+		publicPath: ''
+			/* that's important for webpack to know where our files are put to
                      and if that then is the root folder of the server in the end 
                      or if it's a nested folder.
                      empty string which means you store the files 

@@ -1,0 +1,25 @@
+//json configuration
+{
+    "presets": [
+/* and here I want to set up the targets of that preset
+which means which browser versions do I want to support, 
+It automatically identifies which next generation features I use
+but to know what next generation actually means, 
+it needs to know what my current gen is,
+so which browsers do I target with my app?
+So targets is another javascript object where we can then set up browsers, and browsers
+then is an array where we can use the browser list type of configuration... 
+(google for special syntaxes)
+So, we want to target greater than 1% of market share
+or last two versions*/
+        ["env", {
+            "targets": {
+                "browsers": [
+                    "> 1%",
+                    "last 2 versions"
+                ]
+            }
+        }],
+        "react"
+    ]
+}
