@@ -88,6 +88,22 @@ module.exports = {
 						}
 					}
 				]
+			},
+			// a rull for testing images
+			/* Now the URL loader is a loader which will take our images and 
+            if they are below a certain limit we define,
+            it will actually convert them into data 64 URLs 
+            which it can inline into our documents,
+            so we don't have to download extra file. 
+            But for bigger files, it would be inefficient
+            so files above that limit we specify 
+            will simply be copied to our output folder (fallback ?limit=8000 bytes) and 
+            it will then generate
+            a link to these files and put that into our import
+            we use in our components. */
+			{
+				test: /\.(png|jpe?g|gif)$/,
+				loader: 'url-loader?limit=8000&name=images/[name].[ext]'
 			}
 		]
 	}
