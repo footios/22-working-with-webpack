@@ -1,24 +1,32 @@
 const path = require('path');
 const autoprefixer = require('autoprefixer');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
 
 module.exports = {
-    devtool: 'cheap-module-eval-source-map',
+/*  here I'll remove the `eval` to create more optimal source maps 
+which are less resource intensive,
+you can then always decide whether you want to deploy them or not
+but it's nice to have source maps here too,
+ to quickly find some bugs in the production workflow, if there
+are any. */
+    devtool: 'cheap-module-source-map',
     entry: './src/index.js',
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.js',
-/* lazy loading means that it's an extra bundle and not part of the main bundle 
-which is downloaded initially,
-to support code splitting in webpack 
-and code splitting is just a different name for lazy loading,
-I have to add chunkFileName here to my output config.
-This simply determines what these other files, 
-the separate files which are generated for the lazy loaded
-code which is of course not included in the bundle...  */
         chunkFilename: '[id].js',
         publicPath: ''
     },
+    /* 
+    we want to apply the same transformations as in development
+    so we don't need to touch the loaders,
+    ... I also want to uglify my output, 
+    I want to optimize it and that actually is a plugin 
+    that's built into webpack,
+    So, I'll simply import webpack itself into that file,
+    and then we can use one of the build in plugins.
+    */
     resolve: {
         extensions: ['.js', '.jsx']
     },
@@ -69,6 +77,11 @@ code which is of course not included in the bundle...  */
             template: __dirname + '/src/index.html',
             filename: 'index.html',
             inject: 'body'
-        })
+        }),
+        /* 
+        with `UglifyJsPlugin` I optimize my production workflow, 
+        where I minify the files and ship as little code as possible.
+        */
+        new webpack.optimize.UglifyJsPlugin()  
     ]
 };
